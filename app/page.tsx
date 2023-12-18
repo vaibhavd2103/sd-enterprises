@@ -1,11 +1,18 @@
 "use client";
 
-export default function Home() {
+import { useRouter } from "next/navigation";
+
+
+
+export default function Landing() {
+
+  const router = useRouter();
+
   return (
     <div>
       <button
         onClick={() => {
-          window.location.replace("/dashboard");
+          router.push("/dashboard")
         }}
       >
         Navigate to dashboard
