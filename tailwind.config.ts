@@ -20,9 +20,11 @@ const config: Config = {
         xl: "1440px",
       },
       colors: {
+        primary: "#304D30",
+        "primary-light": "#304D3055",
+        secondary: "#8ADAB2",
         blue: "#1fb6ff",
-        purple: "#7e5bef",
-        pink: "#ff49db",
+        red: "#BF3131",
         orange: "#ff7849",
         green: "#13ce66",
         yellow: "#ffc82c",
