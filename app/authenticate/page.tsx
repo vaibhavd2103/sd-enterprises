@@ -22,20 +22,37 @@ function Authenticate() {
 
   return (
     <div className="flex w-screen h-screen">
-      <div className="w-[50%] bg-red-600"></div>
-      <div className="flex flex-col justify-center items-center w-[50%] bg-green">
-        <p> {method === "LOGIN" ? "Login" : "Register"} as</p>
-        <div className="flex flex-row">
-          <p onClick={() => setUserType("RETAILER")}>Retailer</p>
-          <p onClick={() => setUserType("CUSTOMER")}>Customer</p>
+      <div className="w-[50%] bg-red hidden sm:flex"></div>
+      <div className="flex flex-col justify-center items-center w-[50%]">
+        <p className="text-[30px] font-medium text-primary mb-2">
+          {method === "LOGIN" ? "Login" : "Register"} as
+        </p>
+        <div className="flex flex-row w-[50%] justify-evenly mb-2">
+          <div
+            className="bg-primary w-[50%] flex justify-center text-white font-bold py-2 border-2 border-primary rounded-md cursor-pointer"
+            onClick={() => setUserType("RETAILER")}
+          >
+            Retailer
+          </div>
+          <div
+            className="w-[50%] flex justify-center text-primary font-bold py-2 border-2 border-primary rounded-md cursor-pointer"
+            onClick={() => setUserType("CUSTOMER")}
+          >
+            Customer
+          </div>
         </div>
         {method === "LOGIN" ? (
-          <div className="flex flex-col gap-[20px]">
+          <div className="flex flex-col gap-[20px] w-[50%] items-center">
             {/* ------------------------------------------------------------------------------------------------------------------- */}
-            <div>
-              <p>Phone number</p>
-              {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
+            <div className="w-[100%]">
+              <p className="input-label">
+                Phone number <span className="text-red">*</span>
+              </p>
+              {errors.phoneNumber && (
+                <div className="error-message">{errors.phoneNumber}</div>
+              )}
               <input
+                className="input-text"
                 placeholder="Enter phone number"
                 value={fields.phoneNumber}
                 onChange={(e) => {
@@ -56,10 +73,15 @@ function Authenticate() {
               />
             </div>
             {/* ------------------------------------------------------------------------------------------------------------------- */}
-            <div>
-              <p>Password</p>
-              {errors.password && <p>{errors.password}</p>}
+            <div className="w-[100%]">
+              <p className="input-label">Password *</p>
+              {errors.password && (
+                <div className="error-message">
+                  {errors.password} <span className="text-red">*</span>
+                </div>
+              )}
               <input
+                className="input-text"
                 placeholder="Enter password"
                 value={fields.password}
                 onChange={(e) => {
@@ -70,25 +92,35 @@ function Authenticate() {
                   if (fields.password === "") {
                     setErrors((prev) => ({
                       ...prev,
-                      password: "password cannot be empty",
+                      password: "Password cannot be empty",
                     }));
                   }
                 }}
               />
             </div>
             {/* ------------------------------------------------------------------------------------------------------------------- */}
-            <p>
-              Don't have an account?
-              <span onClick={() => setMethod("SIGN_IN")}>Register</span>
+            <p className="text-primary">
+              Don't have an account? {"  "}
+              <span
+                className="font-bold cursor-pointer"
+                onClick={() => setMethod("SIGN_IN")}
+              >
+                Register
+              </span>
             </p>
           </div>
         ) : (
-          <div className="flex flex-col gap-[20px]">
+          <div className="flex flex-col gap-[20px] w-[50%] items-center">
             {/* ------------------------------------------------------------------------------------------------------------------- */}
-            <div>
-              <p>Name</p>
-              {errors.name && <p>{errors.name}</p>}
+            <div className="w-[100%]">
+              <p className="input-label">
+                Name <span className="text-red">*</span>
+              </p>
+              {errors.name && (
+                <div className="error-message">{errors.name}</div>
+              )}
               <input
+                className="input-text"
                 placeholder="Enter name"
                 value={fields.name}
                 onChange={(e) => {
@@ -109,10 +141,15 @@ function Authenticate() {
               />
             </div>
             {/* ------------------------------------------------------------------------------------------------------------------- */}
-            <div>
-              <p>Phone number</p>
-              {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
+            <div className="w-[100%]">
+              <p className="input-label">
+                Phone number <span className="text-red">*</span>
+              </p>
+              {errors.phoneNumber && (
+                <div className="error-message">{errors.phoneNumber}</div>
+              )}
               <input
+                className="input-text"
                 placeholder="Enter phone number"
                 value={fields.phoneNumber}
                 onChange={(e) => {
@@ -133,10 +170,15 @@ function Authenticate() {
               />
             </div>
             {/* ------------------------------------------------------------------------------------------------------------------- */}
-            <div>
-              <p>Email</p>
-              {errors.email && <p>{errors.email}</p>}
+            <div className="w-[100%]">
+              <p className="input-label">
+                Email <span className="text-red">*</span>
+              </p>
+              {errors.email && (
+                <div className="error-message">{errors.email}</div>
+              )}
               <input
+                className="input-text"
                 placeholder="Enter email"
                 value={fields.email}
                 onChange={(e) => {
@@ -157,10 +199,15 @@ function Authenticate() {
               />
             </div>
             {/* ------------------------------------------------------------------------------------------------------------------- */}
-            <div>
-              <p>Password</p>
-              {errors.password && <p>{errors.password}</p>}
+            <div className="w-[100%]">
+              <p className="input-label">
+                Password <span className="text-red">*</span>
+              </p>
+              {errors.password && (
+                <div className="error-message">{errors.password}</div>
+              )}
               <input
+                className="input-text"
                 placeholder="Enter password"
                 value={fields.password}
                 onChange={(e) => {
@@ -179,10 +226,15 @@ function Authenticate() {
             </div>
             {/* ------------------------------------------------------------------------------------------------------------------- */}
             {userType === "RETAILER" && (
-              <div>
-                <p>Manager id</p>
-                {errors.managerId && <p>{errors.managerId}</p>}
+              <div className="w-[100%]">
+                <p className="input-label">
+                  Manager id <span className="text-red">*</span>
+                </p>
+                {errors.managerId && (
+                  <div className="error-message">{errors.managerId}</div>
+                )}
                 <input
+                  className="input-text"
                   placeholder="Enter managerId"
                   value={fields.managerId}
                   onChange={(e) => {
@@ -204,14 +256,27 @@ function Authenticate() {
               </div>
             )}
             {/* ------------------------------------------------------------------------------------------------------------------- */}
-            <p>
-              Already have an account?
-              <span onClick={() => setMethod("LOGIN")}>Login</span>
+            <p className="text-primary">
+              Already have an account? {"  "}
+              <span
+                className="font-bold cursor-pointer"
+                onClick={() => setMethod("LOGIN")}
+              >
+                Login
+              </span>
             </p>
           </div>
         )}
 
-        {method === "LOGIN" ? <button>Login</button> : <button>Sign in</button>}
+        {method === "LOGIN" ? (
+          <button className="btn-filled px-[100px] py-[10px] text-[16px] my-[15px]">
+            Login
+          </button>
+        ) : (
+          <button className="btn-filled px-[100px] py-[10px] text-[16px] my-[15px]">
+            Sign in
+          </button>
+        )}
       </div>
     </div>
   );
