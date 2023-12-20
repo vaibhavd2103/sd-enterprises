@@ -1,10 +1,13 @@
 "use client";
 
+import { SIGN_UP } from "@/APIs/Authentication.api";
 import React, { useState } from "react";
 
 function Authenticate() {
   const [userType, setUserType] = useState("RETAILER");
   const [method, setMethod] = useState("LOGIN");
+  const [loading, setLoading] = useState(false);
+
   const [fields, setFields] = useState({
     name: "",
     phoneNumber: "",
@@ -19,6 +22,70 @@ function Authenticate() {
     email: "",
     managerId: "",
   });
+
+  const validator = () => {
+    let valid: boolean = true;
+
+    if (!fields.name) {
+      valid = false;
+      setErrors((prev) => ({ ...prev, name: "Name cannot be empty" }));
+    }
+    if (!fields.phoneNumber) {
+      valid = false;
+      setErrors((prev) => ({
+        ...prev,
+        phoneNumber: "Phone number cannot be empty",
+      }));
+    }
+    if (fields.password.length < 6) {
+      valid = false;
+      setErrors((prev) => ({
+        ...prev,
+        password: "Password must be at least 6 characters",
+      }));
+    }
+    if (!fields.managerId) {
+      valid = false;
+      setErrors((prev) => ({
+        ...prev,
+        managerId: "Manager ID cannot be empty",
+      }));
+    }
+    return valid;
+  };
+
+  /* ------------------------------------------------------------------------------------------------------------------- */
+
+  const signUp = async () => {
+    setLoading(true);
+    const body = {
+      name: fields.name,
+      email: fields.email,
+      password: fields.password,
+      phone_number: fields.phoneNumber,
+      manager_id: fields.managerId,
+    };
+    await SIGN_UP(body)
+      .then((res) => {
+        console.log(res);
+        setMethod("LOGIN");
+        setFields({
+          name: "",
+          phoneNumber: "",
+          password: "",
+          email: "",
+          managerId: "",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  /* ------------------------------------------------------------------------------------------------------------------- */
 
   return (
     <div className="flex w-screen h-screen">
@@ -171,9 +238,7 @@ function Authenticate() {
             </div>
             {/* ------------------------------------------------------------------------------------------------------------------- */}
             <div className="w-[100%]">
-              <p className="input-label">
-                Email <span className="text-red">*</span>
-              </p>
+              <p className="input-label">Email</p>
               {errors.email && (
                 <div className="error-message">{errors.email}</div>
               )}
@@ -218,7 +283,7 @@ function Authenticate() {
                   if (fields.password === "") {
                     setErrors((prev) => ({
                       ...prev,
-                      password: "password cannot be empty",
+                      password: "Password cannot be empty",
                     }));
                   }
                 }}
@@ -228,7 +293,7 @@ function Authenticate() {
             {userType === "RETAILER" && (
               <div className="w-[100%]">
                 <p className="input-label">
-                  Manager id <span className="text-red">*</span>
+                  Manager ID <span className="text-red">*</span>
                 </p>
                 {errors.managerId && (
                   <div className="error-message">{errors.managerId}</div>
@@ -248,7 +313,7 @@ function Authenticate() {
                     if (fields.managerId === "") {
                       setErrors((prev) => ({
                         ...prev,
-                        managerId: "Manager id cannot be empty",
+                        managerId: "Manager ID cannot be empty",
                       }));
                     }
                   }}
@@ -273,7 +338,16 @@ function Authenticate() {
             Login
           </button>
         ) : (
-          <button className="btn-filled px-[100px] py-[10px] text-[16px] my-[15px]">
+          <button
+            className="btn-filled px-[100px] py-[10px] text-[16px] my-[15px]"
+            onClick={() => {
+              const valid = validator();
+              if (valid) {
+                signUp();
+              }
+            }}
+            disabled={loading}
+          >
             Sign in
           </button>
         )}
