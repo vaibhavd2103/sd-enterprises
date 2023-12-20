@@ -1,12 +1,18 @@
 "use client";
 
 import { SIGN_UP } from "@/APIs/Authentication.api";
-import React, { useState } from "react";
+import { GET_ALL_RETAILERS } from "@/APIs/Retailer.api";
+import { RetailerType } from "@/types/retailer.types";
+import React, { useEffect, useRef, useState } from "react";
+import AsyncSelect from "react-select/async";
 
 function Authenticate() {
-  const [userType, setUserType] = useState("RETAILER");
-  const [method, setMethod] = useState("LOGIN");
+  const [userType, setUserType] = useState<"RETAILER" | "CUSTOMER">("RETAILER");
+  const [method, setMethod] = useState<"LOGIN" | "SIGN_UP">("LOGIN");
   const [loading, setLoading] = useState(false);
+  const [managers, setManagers] = useState<{ label: string; value: string }[]>(
+    []
+  );
 
   const [fields, setFields] = useState({
     name: "",
@@ -44,13 +50,13 @@ function Authenticate() {
         password: "Password must be at least 6 characters",
       }));
     }
-    if (!fields.managerId) {
-      valid = false;
-      setErrors((prev) => ({
-        ...prev,
-        managerId: "Manager ID cannot be empty",
-      }));
-    }
+    // if (!fields.managerId) {
+    //   valid = false;
+    //   setErrors((prev) => ({
+    //     ...prev,
+    //     managerId: "Manager ID cannot be empty",
+    //   }));
+    // }
     return valid;
   };
 
@@ -63,7 +69,7 @@ function Authenticate() {
       email: fields.email,
       password: fields.password,
       phone_number: fields.phoneNumber,
-      manager_id: fields.managerId,
+      manager_id: "sheela@2103",
     };
     await SIGN_UP(body)
       .then((res) => {
@@ -86,6 +92,40 @@ function Authenticate() {
   };
 
   /* ------------------------------------------------------------------------------------------------------------------- */
+
+  const getAllManagers = async (value: string) => {
+    await GET_ALL_RETAILERS()
+      .then((res) => {
+        if (res.data.status === "success") {
+          const arr = res.data.data.map((item) => {
+            return {
+              label: item.name,
+              value: item._id,
+            };
+          });
+          setManagers(arr);
+          // console.log(arr);
+          return arr;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const timeout = useRef<NodeJS.Timeout>();
+  const handleDebounceSearch = (value: string) => {
+    clearTimeout(timeout.current);
+    return new Promise<any>((resolve) => {
+      timeout.current = setTimeout(() => {
+        resolve(getAllManagers(value));
+      }, 1000);
+    });
+  };
+
+  useEffect(() => {
+    getAllManagers("");
+  }, []);
 
   return (
     <div className="flex w-screen h-screen">
@@ -170,7 +210,7 @@ function Authenticate() {
               Don't have an account? {"  "}
               <span
                 className="font-bold cursor-pointer"
-                onClick={() => setMethod("SIGN_IN")}
+                onClick={() => setMethod("SIGN_UP")}
               >
                 Register
               </span>
@@ -298,7 +338,13 @@ function Authenticate() {
                 {errors.managerId && (
                   <div className="error-message">{errors.managerId}</div>
                 )}
-                <input
+                {/* <Select options={options} /> */}
+                <AsyncSelect
+                  defaultOptions
+                  options={managers}
+                  loadOptions={handleDebounceSearch}
+                />
+                {/* <input
                   className="input-text"
                   placeholder="Enter managerId"
                   value={fields.managerId}
@@ -317,7 +363,7 @@ function Authenticate() {
                       }));
                     }
                   }}
-                />
+                /> */}
               </div>
             )}
             {/* ------------------------------------------------------------------------------------------------------------------- */}
