@@ -20,7 +20,7 @@ function LandingNavbar() {
     },
   ];
   return (
-    <div className="fixed flex items-center justify-between px-5 h-16 bg-primary w-[100%] top-0 z-10">
+    <div className="fixed flex items-center justify-between px-5 h-16 bg-primary w-[100%] top-0 z-20">
       <div className="w-[140px]"></div>
       <div className="flex items-center gap-5">
         {options.map((item) => {
