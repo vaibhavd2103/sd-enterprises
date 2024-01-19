@@ -1,21 +1,18 @@
 import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
-import LandingCoverPhoto from "../assets/LandingCoverPhoto.jpg";
+import LandingCoverPhoto from "@/assets/LandingCoverPhoto.jpg";
 
-function FirstSection() {
+function LandingSection() {
   return (
-    <div
-      className="w-screen aspect-video flex items-center justify-center flex-col relative bg-fixed"
-      style={{ backgroundImage: `url(LandingCoverPhoto)` }}
-    >
+    <div className="w-screen flex items-center justify-center flex-col relative bg-fixed h-screen">
       <Image
         src={LandingCoverPhoto}
         alt="landing image"
-        className="fixed z-0"
+        className="fixed z-0 object-cover w-screen h-screen"
       />
       <div className="z-10 flex flex-col items-center gap-4">
-        <h1 className="font-serif text-white text-6xl font-semibold text-center drop-shadow-lg">
+        <h1 className="font-serif text-white text-6xl font-semibold text-center drop-shadow-2xl">
           {`Nature's Haven: `}
           <span className="text-secondary">{"Unveil Your Wellness"}</span>
         </h1>
@@ -27,4 +24,4 @@ function FirstSection() {
   );
 }
 
-export default FirstSection;
+export default LandingSection;

@@ -19,7 +19,7 @@ function Authenticate() {
             <input placeholder="Enter phone number" />
             <input placeholder="Enter password" />
             <p>
-              Don't have an account?
+              {`Don't have an account?`}
               <span onClick={() => setMethod("SIGN_IN")}>Register</span>
             </p>
           </div>

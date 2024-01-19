@@ -21,12 +21,12 @@ function LandingNavbar() {
   ];
   return (
     <div className="fixed flex items-center justify-between px-5 h-16 bg-primary w-[100%] top-0 z-20">
-      <div className="w-[140px]"></div>
+      <div className="hidden md:flex w-[140px]"></div>
       <div className="flex items-center gap-5">
         {options.map((item) => {
           return (
-            <div key={item.id} className="w-[100px] flex justify-center">
-              <h3 className="font-semibold text-white transition-all hover:text-xl cursor-pointer">
+            <div key={item.id} className="flex justify-center">
+              <h3 className="hidden md:flex font-semibold text-white transition-all hover:text-xl cursor-pointer">
                 {item.name}
               </h3>
             </div>

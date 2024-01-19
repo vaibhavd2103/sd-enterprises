@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-function Carousal() {
+function LandingProducts() {
   const carousalItems = [
     {
       id: "1",
@@ -38,12 +38,12 @@ function Carousal() {
     },
   ];
   return (
-    <div className="py-[1px] gap-[1px] flex bg-white w-screen">
+    <div className="p-[1px] flex flex-col gap-[1px] md:flex-row bg-white w-screen z-10">
       {carousalItems.map((item) => {
         return (
           <div
             key={item.id}
-            className="group bg-black relative flex flex-col items-center w-[25%] hover:w-screen transition-all duration-500 rounded-md p-2 h-screen justify-center"
+            className="group bg-black relative flex flex-col items-center w-[100%] md:w-[25%] hover:w-[100%] transition-all duration-500 p-2 justify-center md:h-screen"
           >
             <Image
               src={item.image}
@@ -69,4 +69,4 @@ function Carousal() {
   );
 }
 
-export default Carousal;
+export default LandingProducts;
