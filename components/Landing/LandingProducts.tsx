@@ -38,7 +38,7 @@ function LandingProducts() {
     },
   ];
   return (
-    <div className="p-[1px] flex flex-col gap-[1px] md:flex-row bg-white w-screen z-10">
+    <div className="p-[1px] flex flex-col gap-[1px] md:flex-row bg-white w-screen">
       {carousalItems.map((item) => {
         return (
           <div
@@ -48,9 +48,9 @@ function LandingProducts() {
             <Image
               src={item.image}
               alt="image"
-              className="object-cover absolute z-10 h-[100%] opacity-40 group-hover:opacity-100 transition-all duration-500"
+              className="object-cover absolute h-[100%] opacity-40 group-hover:opacity-100 transition-all duration-500"
             />
-            <div className="flex flex-col items-center justify-center w-[90%] z-20 group-hover:backdrop-blur-xl rounded-xl group-hover:bg-[#0003] group-hover:p-2 ">
+            <div className="flex flex-col items-center justify-center w-[90%] z-0 group-hover:backdrop-blur-xl rounded-xl group-hover:bg-[#0003] group-hover:p-2 ">
               <h1 className="text-center font-bold text-2xl text-white">
                 {item.title}
               </h1>
