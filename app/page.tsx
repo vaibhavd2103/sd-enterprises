@@ -1,75 +1,62 @@
 "use client";
 
-import LandingNavbar from "@/components/LandingNavbar";
+import LandingNavbar from "@/components/Landing/LandingNavbar";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import LandingSection from "@/components/Landing/LandingSection";
+import LandingProducts from "@/components/Landing/LandingProducts";
 import Image from "next/image";
-import { Parallax } from "react-scroll-parallax";
-import { motion, useScroll } from "framer-motion";
+import LandingCoverPhoto from "@/assets/LandingCoverPhoto.jpg";
+import Testimonials from "@/components/Landing/Testimonials";
 
 export default function Landing() {
-  const { scrollYProgress } = useScroll();
+  const { scrollYProgress, scrollY } = useScroll();
+  let scrollValue = useTransform(scrollY, [0, 900], ["0%", "100%"]);
   return (
     <div className="flex flex-col w-screen">
       <LandingNavbar />
-      <div className="flex flex-col relative mt-16">
-        <motion.div
-          style={{ scaleX: scrollYProgress }}
-          className="w-screen h-1 bg-secondary fixed z-20 top-0 left-0 right-0 mt-16 self-start"
-        />
-        <div className="relative flex items-center w-screen aspect-video justify-end pr-10">
+      <motion.div
+        style={{ scaleX: scrollYProgress }}
+        className="w-screen h-1 bg-secondary fixed z-10 top-0 left-0 right-0 mt-16 self-start"
+      />
+      <div className="flex flex-col relative mt-16 z-0">
+        {/* <LandingSection /> */}
+        <div className="w-screen flex items-center justify-center flex-col relative bg-fixed h-screen">
           <Image
-            src={require("@/assets/HairOil.jpg")}
-            alt="hair oil"
-            className="absolute left-0 top-0"
+            src={LandingCoverPhoto}
+            alt="landing image"
+            className="absolute object-cover w-screen h-screen"
           />
-          {/* <Parallax speed={30}> */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="flex flex-col max-w-[600px] w-[90vw] backdrop-blur-xl p-5 items-center z-20 mt-80"
-          >
-            <h1 className="text-white font-sans font-bold text-4xl">
-              Hair Oil
+            className="absolute object-cover w-screen h-screen bg-white"
+            style={{ opacity: scrollValue }}
+          ></motion.div>
+          <div className="z-10 flex flex-col items-center gap-4">
+            <h1 className="font-serif text-white text-6xl font-semibold text-center drop-shadow-2xl">
+              {`Nature's Haven: `}
+              <span className="text-secondary">{"Unveil Your Wellness"}</span>
             </h1>
-            <p className="text-gray-light mt-4">
-              {`Crafted with utmost care and a dedication to natural beauty, our herbal hair oil is a symphony of botanical goodness. Infused with a blend of time-honored extracts like nourishing coconut oil, revitalizing amla, and strengthening bhringraj, each drop is a testament to centuries of holistic hair care wisdom. We meticulously source and combine these potent herbs, harnessing their inherent properties to promote lush, vibrant hair. Our formulation aims not just to enhance hair's radiance but to nurture the scalp, fostering an environment where healthy hair thrives. From the soothing touch during application to the lustrous results, our herbal hair oil is a testament to nature's bounty, promising a journey towards stronger, silkier, and more resilient locks.`}
-            </p>
-          </motion.div>
-          {/* </Parallax> */}
+            <h3 className="font-mono text-gray-light text-3xl font-semibold text-center max-w-[600px] drop-shadow-lg">
+              Discover Your Essential Care Routine with Our Trusted Products
+            </h3>
+          </div>
         </div>
-        <div className="relative flex items-center w-screen aspect-video justify-start pl-10">
-          <Image
-            src={require("@/assets/Image2.jpg")}
-            alt="hair oil"
-            className="absolute left-0 top-0"
-          />
-          <Parallax speed={30}>
-            <div className="flex flex-col max-w-[400px] backdrop-blur-xl p-5 items-center z-20 mt-80">
-              <h1 className="text-white font-sans font-bold text-4xl">
-                Hair Oil
-              </h1>
-              <p className="text-gray-light mt-4">
-                {`Crafted with utmost care and a dedication to natural beauty, our herbal hair oil is a symphony of botanical goodness. Infused with a blend of time-honored extracts like nourishing coconut oil, revitalizing amla, and strengthening bhringraj, each drop is a testament to centuries of holistic hair care wisdom. We meticulously source and combine these potent herbs, harnessing their inherent properties to promote lush, vibrant hair. Our formulation aims not just to enhance hair's radiance but to nurture the scalp, fostering an environment where healthy hair thrives. From the soothing touch during application to the lustrous results, our herbal hair oil is a testament to nature's bounty, promising a journey towards stronger, silkier, and more resilient locks.`}
-              </p>
-            </div>
-          </Parallax>
+        <div className="w-screen flex items-center justify-center flex-col bg-transparent relative">
+          <div className="bg-gradient-to-t from-white to-transparent w-screen h-[300px] absolute -top-[300px]"></div>
+          <h3 className="text-black text-2xl md:text-4xl font-semibold mb-8 text-center">
+            Some of our best selling products!
+          </h3>
+          <div className="relative">
+            <LandingProducts />
+            <div className="invisible md:visible bg-gradient-to-b from-white to-transparent w-screen h-[200px] absolute top-[0px]"></div>
+            <div className="invisible md:visible bg-gradient-to-t from-white to-transparent w-screen h-[200px] absolute bottom-[0px]"></div>
+          </div>
         </div>
-        <div className="relative flex items-center w-screen aspect-video justify-end pr-10">
-          <Image
-            src={require("@/assets/Image3.jpg")}
-            alt="hair oil"
-            className="absolute left-0 top-0"
-          />
-          <Parallax speed={30}>
-            <div className="flex flex-col w-[40vw] backdrop-blur-xl p-5 items-center z-20 mt-80">
-              <h1 className="text-white font-sans font-bold text-4xl">
-                Hair Oil
-              </h1>
-              <p className="text-gray-light mt-4">
-                {`Crafted with utmost care and a dedication to natural beauty, our herbal hair oil is a symphony of botanical goodness. Infused with a blend of time-honored extracts like nourishing coconut oil, revitalizing amla, and strengthening bhringraj, each drop is a testament to centuries of holistic hair care wisdom. We meticulously source and combine these potent herbs, harnessing their inherent properties to promote lush, vibrant hair. Our formulation aims not just to enhance hair's radiance but to nurture the scalp, fostering an environment where healthy hair thrives. From the soothing touch during application to the lustrous results, our herbal hair oil is a testament to nature's bounty, promising a journey towards stronger, silkier, and more resilient locks.`}
-              </p>
-            </div>
-          </Parallax>
-        </div>
+        <Testimonials />
       </div>
     </div>
   );
