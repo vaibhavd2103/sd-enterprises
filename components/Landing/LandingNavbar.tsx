@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function LandingNavbar() {
@@ -19,6 +20,7 @@ function LandingNavbar() {
       name: "Contact",
     },
   ];
+  const router = useRouter();
   return (
     <div className="fixed flex items-center justify-between px-5 h-16 bg-primary w-[100%] top-0 z-20">
       <div className="hidden md:flex w-[140px]"></div>
@@ -33,7 +35,14 @@ function LandingNavbar() {
           );
         })}
       </div>
-      <button className="btn-filled text-black">Login / Sign up</button>
+      <button
+        onClick={() => {
+          router.push("/authenticate");
+        }}
+        className="btn-filled text-black"
+      >
+        Login / Sign up
+      </button>
     </div>
   );
 }

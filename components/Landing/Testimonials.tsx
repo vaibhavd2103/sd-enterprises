@@ -106,7 +106,7 @@ function Testimonials() {
       <h3 className="text-2xl md:text-4xl drop-shadow-2xl mb-8 font-semibold text-center">
         Testimonials
       </h3>
-      <div className="grid md:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {reviews.map((item) => {
           return (
             <motion.div

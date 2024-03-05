@@ -29,8 +29,8 @@ const config: Config = {
         xl: "1440px",
       },
       colors: {
-        primary: "#304D30",
-        "primary-light": "#304D3055",
+        primary: "#1B4242",
+        "primary-light": "#5C8374",
         secondary: "#8ADAB2",
         blue: "#1fb6ff",
         red: "#BF3131",

@@ -12,6 +12,7 @@ import LandingProducts from "@/components/Landing/LandingProducts";
 import Image from "next/image";
 import LandingCoverPhoto from "@/assets/LandingCoverPhoto.jpg";
 import Testimonials from "@/components/Landing/Testimonials";
+import JoinAsRetailer from "@/components/Landing/JoinAsRetailer";
 
 export default function Landing() {
   const { scrollYProgress, scrollY } = useScroll();
@@ -31,10 +32,10 @@ export default function Landing() {
             alt="landing image"
             className="absolute object-cover w-screen h-screen"
           />
-          <motion.div
+          {/* <motion.div
             className="absolute object-cover w-screen h-screen bg-white"
             style={{ opacity: scrollValue }}
-          ></motion.div>
+          ></motion.div> */}
           <div className="z-10 flex flex-col items-center gap-4">
             <h1 className="font-serif text-white text-6xl font-semibold text-center drop-shadow-2xl">
               {`Nature's Haven: `}
@@ -57,6 +58,12 @@ export default function Landing() {
           </div>
         </div>
         <Testimonials />
+        <div className="w-full flex flex-col justify-center items-center overflow-hidden bg-primary p-6">
+          <h3 className="text-white text-2xl md:text-4xl font-semibold mb-8 text-center">
+            Want to be a part of our growing community?
+          </h3>
+          <JoinAsRetailer />
+        </div>
       </div>
     </div>
   );
