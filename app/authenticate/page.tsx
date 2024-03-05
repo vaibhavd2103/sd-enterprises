@@ -3,6 +3,7 @@
 import { SIGN_UP } from "@/APIs/Authentication.api";
 import { GET_ALL_RETAILERS } from "@/APIs/Retailer.api";
 import { RetailerType } from "@/types/retailer.types";
+import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import AsyncSelect from "react-select/async";
 
@@ -159,7 +160,13 @@ function Authenticate() {
 
   return (
     <div className="flex w-screen h-screen justify-center">
-      <div className="w-[50%] bg-red hidden md:flex"></div>
+      <div className="w-[50%] bg-red hidden md:flex">
+        <img
+          className="h-full w-full object-cover"
+          src="https://images.unsplash.com/photo-1550147760-44c9966d6bc7?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="abc"
+        />
+      </div>
       <div className="flex flex-col justify-center items-center w-[100%] md:w-[50%]">
         <div className="max-w-[470px] w-[100%] flex flex-col items-center">
           <p className="text-[30px] font-medium text-primary mb-2">
