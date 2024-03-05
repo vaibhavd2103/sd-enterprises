@@ -13,7 +13,9 @@ function JoinAsRetailer() {
           sheeladangeiaf13@gmail.com
         </span>
       </p>
-      <button className="btn-filled text-black mt-6">Contact us</button>
+      <button className="btn-filled text-black mt-6 bg-secondary">
+        Contact us
+      </button>
     </div>
   );
 }

@@ -39,7 +39,7 @@ function LandingNavbar() {
         onClick={() => {
           router.push("/authenticate");
         }}
-        className="btn-filled text-black"
+        className="btn-filled text-black bg-secondary"
       >
         Login / Sign up
       </button>
